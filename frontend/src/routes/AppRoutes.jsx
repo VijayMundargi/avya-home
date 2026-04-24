@@ -9,6 +9,7 @@ import AssociateList from "../pages/associates/AssociateList";
 import CreateAssociate from "../pages/associates/CreateAssociate";
 import EditAssociate from "../pages/associates/EditAssociate";
 import Profile from "../pages/profile/Profile";
+import WelcomeLetterPage from "../pages/associates/WelcomeLetterPage"; // ✅ ADD THIS
 
 import ProtectedRoute from "./ProtectedRoute";
 import DashboardLayout from "../layout/DashboardLayout";
@@ -75,6 +76,18 @@ const AppRoutes = () => {
             <ProtectedRoute roles={["super_admin"]}>
               <DashboardLayout>
                 <EditAssociate />
+              </DashboardLayout>
+            </ProtectedRoute>
+          }
+        />
+
+        {/* ✅ ADD THIS ROUTE */}
+        <Route
+          path="/welcome-letter"
+          element={
+            <ProtectedRoute roles={["super_admin"]}>
+              <DashboardLayout>
+                <WelcomeLetterPage />
               </DashboardLayout>
             </ProtectedRoute>
           }

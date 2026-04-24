@@ -17,19 +17,9 @@ import {
 
 import { NavLink } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
-import { useState } from "react";
 
 const Sidebar = () => {
   const { user } = useAuth();
-  const [open, setOpen] = useState({
-    associates: true,
-    finance: true,
-    reports: false,
-  });
-
-  const toggle = (key) => {
-    setOpen({ ...open, [key]: !open[key] });
-  };
 
   const linkClass = ({ isActive }) =>
     `flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition ${
@@ -38,7 +28,8 @@ const Sidebar = () => {
         : "text-gray-300 hover:bg-gray-800"
     }`;
 
-  const sectionTitle = "px-3 pt-4 pb-1 text-xs text-gray-400 uppercase";
+  const sectionTitle =
+    "px-3 pt-4 pb-1 text-xs text-gray-400 uppercase";
 
   return (
     <div className="w-64 h-screen bg-[#0f172a] text-white flex flex-col">
@@ -61,7 +52,7 @@ const Sidebar = () => {
           My Profile
         </NavLink>
 
-        {/* ASSOCIATES */}
+        {/* ================= ASSOCIATES ================= */}
         {(user?.role === "super_admin" || user?.role === "manager") && (
           <>
             <p className={sectionTitle}>Associates</p>
@@ -72,10 +63,17 @@ const Sidebar = () => {
             </NavLink>
 
             {user?.role === "super_admin" && (
-              <NavLink to="/associates/create" className={linkClass}>
-                <Plus size={18} />
-                Create Associate
-              </NavLink>
+              <>
+                <NavLink to="/associates/create" className={linkClass}>
+                  <Plus size={18} />
+                  Create Associate
+                </NavLink>
+
+                <NavLink to="/welcome-letter" className={linkClass}>
+                  <FileText size={18} />
+                  Welcome Letter
+                </NavLink>
+              </>
             )}
 
             <NavLink to="/referrals" className={linkClass}>
@@ -90,7 +88,7 @@ const Sidebar = () => {
           </>
         )}
 
-        {/* PROJECTS */}
+        {/* ================= PROJECTS ================= */}
         {(user?.role === "super_admin" || user?.role === "manager") && (
           <>
             <p className={sectionTitle}>Projects</p>
@@ -107,7 +105,7 @@ const Sidebar = () => {
           </>
         )}
 
-        {/* CUSTOMERS */}
+        {/* ================= CUSTOMERS ================= */}
         <>
           <p className={sectionTitle}>Customers</p>
 
@@ -122,7 +120,7 @@ const Sidebar = () => {
           </NavLink>
         </>
 
-        {/* FINANCE */}
+        {/* ================= FINANCE ================= */}
         <>
           <p className={sectionTitle}>Finance</p>
 
@@ -142,7 +140,7 @@ const Sidebar = () => {
           </NavLink>
         </>
 
-        {/* REPORTS */}
+        {/* ================= REPORTS ================= */}
         <>
           <p className={sectionTitle}>Reports</p>
 
@@ -152,7 +150,7 @@ const Sidebar = () => {
           </NavLink>
         </>
 
-        {/* SETTINGS */}
+        {/* ================= SETTINGS ================= */}
         {user?.role === "super_admin" && (
           <>
             <p className={sectionTitle}>Settings</p>
