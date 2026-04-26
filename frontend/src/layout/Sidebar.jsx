@@ -29,17 +29,17 @@ const Sidebar = () => {
     }`;
 
   const sectionTitle =
-    "px-3 pt-4 pb-1 text-xs text-gray-400 uppercase";
+    "px-3 pt-4 pb-1 text-xs text-gray-400 uppercase tracking-wide";
 
   return (
     <div className="w-64 h-screen bg-[#0f172a] text-white flex flex-col">
 
       {/* LOGO */}
       <div className="p-5 border-b border-gray-800">
-        <h1 className="text-lg font-semibold">Avya CRM</h1>
+        <h1 className="text-lg font-semibold tracking-wide">Avya CRM</h1>
       </div>
 
-      <div className="flex-1 overflow-y-auto px-2">
+      <div className="flex-1 overflow-y-auto px-2 pb-4">
 
         {/* DASHBOARD */}
         <NavLink to="/dashboard" className={linkClass}>
@@ -52,7 +52,7 @@ const Sidebar = () => {
           My Profile
         </NavLink>
 
-        {/* ASSOCIATES */}
+        {/* ================= ASSOCIATES ================= */}
         {(user?.role === "super_admin" || user?.role === "manager") && (
           <>
             <p className={sectionTitle}>Associates</p>
@@ -88,7 +88,7 @@ const Sidebar = () => {
           </>
         )}
 
-        {/* PROJECTS */}
+        {/* ================= PROJECTS ================= */}
         {(user?.role === "super_admin" || user?.role === "manager") && (
           <>
             <p className={sectionTitle}>Projects</p>
@@ -105,14 +105,22 @@ const Sidebar = () => {
               </NavLink>
             )}
 
+            {/* 🔥 PLOTS SUB-MODULE */}
             <NavLink to="/plots" className={linkClass}>
               <Map size={18} />
-              Plots
+              All Plots
             </NavLink>
+
+            {user?.role === "super_admin" && (
+              <NavLink to="/plots/create" className={linkClass}>
+                <Plus size={18} />
+                Create Plot
+              </NavLink>
+            )}
           </>
         )}
 
-        {/* CUSTOMERS */}
+        {/* ================= CUSTOMERS ================= */}
         <>
           <p className={sectionTitle}>Customers</p>
 
@@ -127,7 +135,7 @@ const Sidebar = () => {
           </NavLink>
         </>
 
-        {/* FINANCE */}
+        {/* ================= FINANCE ================= */}
         <>
           <p className={sectionTitle}>Finance</p>
 
@@ -147,7 +155,7 @@ const Sidebar = () => {
           </NavLink>
         </>
 
-        {/* REPORTS */}
+        {/* ================= REPORTS ================= */}
         <>
           <p className={sectionTitle}>Reports</p>
 
@@ -157,7 +165,7 @@ const Sidebar = () => {
           </NavLink>
         </>
 
-        {/* SETTINGS */}
+        {/* ================= SETTINGS ================= */}
         {user?.role === "super_admin" && (
           <>
             <p className={sectionTitle}>Settings</p>

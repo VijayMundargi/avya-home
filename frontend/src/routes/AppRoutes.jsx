@@ -11,10 +11,14 @@ import EditAssociate from "../pages/associates/EditAssociate";
 import Profile from "../pages/profile/Profile";
 import WelcomeLetterPage from "../pages/associates/WelcomeLetterPage";
 
-// ✅ ADD PROJECT PAGES
+
 import ProjectList from "../pages/projects/ProjectList";
 import CreateProject from "../pages/projects/CreateProject";
 import EditProject from "../pages/projects/EditProject";
+
+import PlotList from "../pages/plots/PlotList";
+import CreatePlot from "../pages/plots/CreatePlot";
+import EditPlot from "../pages/plots/EditPlot";
 
 import ProtectedRoute from "./ProtectedRoute";
 import DashboardLayout from "../layout/DashboardLayout";
@@ -87,7 +91,7 @@ const AppRoutes = () => {
           }
         />
 
-        {/* ✅ WELCOME LETTER */}
+        
         <Route
           path="/welcome-letter"
           element={
@@ -99,7 +103,7 @@ const AppRoutes = () => {
           }
         />
 
-        {/* ================= PROJECTS ================= */}
+      
 
         <Route
           path="/projects"
@@ -133,6 +137,41 @@ const AppRoutes = () => {
             </ProtectedRoute>
           }
         />
+
+        {/* ================= PLOTS ================= */}
+
+<Route
+  path="/plots"
+  element={
+    <ProtectedRoute roles={["super_admin", "manager"]}>
+      <DashboardLayout>
+        <PlotList />
+      </DashboardLayout>
+    </ProtectedRoute>
+  }
+/>
+
+<Route
+  path="/plots/create"
+  element={
+    <ProtectedRoute roles={["super_admin"]}>
+      <DashboardLayout>
+        <CreatePlot />
+      </DashboardLayout>
+    </ProtectedRoute>
+  }
+/>
+
+<Route
+  path="/plots/edit/:id"
+  element={
+    <ProtectedRoute roles={["super_admin"]}>
+      <DashboardLayout>
+        <EditPlot />
+      </DashboardLayout>
+    </ProtectedRoute>
+  }
+/>
 
       </Routes>
     </BrowserRouter>
