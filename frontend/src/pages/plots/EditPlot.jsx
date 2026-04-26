@@ -3,6 +3,7 @@ import { getPlot, updatePlot } from "../../api/plot.api";
 import { useParams, useNavigate } from "react-router-dom";
 import toast from "../../utils/toast";
 
+
 const EditPlot = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -126,6 +127,7 @@ const EditPlot = () => {
             >
               {saving ? "Updating..." : "Update Plot"}
             </button>
+            
 
           </div>
 

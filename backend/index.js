@@ -25,7 +25,7 @@ app.use(cookieParser());
 app.use('/api', UserRoute);
 app.use('/api',assocaiateRoute);
 app.use('/api',ProjectRoute)
-app.use('/api', PlotRoute);
+app.use('/api/plot', PlotRoute);
 console.log("PlotRoute:", typeof PlotRoute);
 
 app.use(ErrorMiddleware);      

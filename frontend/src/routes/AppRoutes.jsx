@@ -1,25 +1,32 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
+// AUTH
 import Login from "../pages/auth/Login";
 import ForgotPassword from "../pages/auth/ForgotPassword";
 import ResetPassword from "../pages/auth/ResetPassword";
 
+// DASHBOARD
 import Dashboard from "../pages/dashboard/Dashboard";
+import Profile from "../pages/profile/Profile";
+
+// ASSOCIATES
 import AssociateList from "../pages/associates/AssociateList";
 import CreateAssociate from "../pages/associates/CreateAssociate";
 import EditAssociate from "../pages/associates/EditAssociate";
-import Profile from "../pages/profile/Profile";
 import WelcomeLetterPage from "../pages/associates/WelcomeLetterPage";
 
-
+// PROJECTS
 import ProjectList from "../pages/projects/ProjectList";
 import CreateProject from "../pages/projects/CreateProject";
 import EditProject from "../pages/projects/EditProject";
 
+// PLOTS
 import PlotList from "../pages/plots/PlotList";
 import CreatePlot from "../pages/plots/CreatePlot";
 import EditPlot from "../pages/plots/EditPlot";
+import PlotGrid from "../pages/plots/PlotGrid";
 
+// LAYOUT & AUTH
 import ProtectedRoute from "./ProtectedRoute";
 import DashboardLayout from "../layout/DashboardLayout";
 
@@ -28,12 +35,12 @@ const AppRoutes = () => {
     <BrowserRouter>
       <Routes>
 
-        {/* PUBLIC */}
+        {/* ================= PUBLIC ================= */}
         <Route path="/" element={<Login />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password" element={<ResetPassword />} />
 
-        {/* DASHBOARD */}
+        {/* ================= DASHBOARD ================= */}
         <Route
           path="/dashboard"
           element={
@@ -45,7 +52,7 @@ const AppRoutes = () => {
           }
         />
 
-        {/* PROFILE */}
+        {/* ================= PROFILE ================= */}
         <Route
           path="/profile"
           element={
@@ -57,7 +64,7 @@ const AppRoutes = () => {
           }
         />
 
-        {/* ASSOCIATES */}
+        {/* ================= ASSOCIATES ================= */}
         <Route
           path="/associates"
           element={
@@ -91,7 +98,6 @@ const AppRoutes = () => {
           }
         />
 
-        
         <Route
           path="/welcome-letter"
           element={
@@ -103,8 +109,7 @@ const AppRoutes = () => {
           }
         />
 
-      
-
+        {/* ================= PROJECTS ================= */}
         <Route
           path="/projects"
           element={
@@ -140,38 +145,50 @@ const AppRoutes = () => {
 
         {/* ================= PLOTS ================= */}
 
-<Route
-  path="/plots"
-  element={
-    <ProtectedRoute roles={["super_admin", "manager"]}>
-      <DashboardLayout>
-        <PlotList />
-      </DashboardLayout>
-    </ProtectedRoute>
-  }
-/>
+        <Route
+          path="/plots"
+          element={
+            <ProtectedRoute roles={["super_admin", "manager"]}>
+              <DashboardLayout>
+                <PlotList />
+              </DashboardLayout>
+            </ProtectedRoute>
+          }
+        />
 
-<Route
-  path="/plots/create"
-  element={
-    <ProtectedRoute roles={["super_admin"]}>
-      <DashboardLayout>
-        <CreatePlot />
-      </DashboardLayout>
-    </ProtectedRoute>
-  }
-/>
+        <Route
+          path="/plots/create"
+          element={
+            <ProtectedRoute roles={["super_admin"]}>
+              <DashboardLayout>
+                <CreatePlot />
+              </DashboardLayout>
+            </ProtectedRoute>
+          }
+        />
 
-<Route
-  path="/plots/edit/:id"
-  element={
-    <ProtectedRoute roles={["super_admin"]}>
-      <DashboardLayout>
-        <EditPlot />
-      </DashboardLayout>
-    </ProtectedRoute>
-  }
-/>
+        <Route
+          path="/plots/edit/:id"
+          element={
+            <ProtectedRoute roles={["super_admin"]}>
+              <DashboardLayout>
+                <EditPlot />
+              </DashboardLayout>
+            </ProtectedRoute>
+          }
+        />
+
+        {/* 🔥 PLOT MAP GRID (FIXED) */}
+        <Route
+          path="/plots/map"
+          element={
+            <ProtectedRoute roles={["super_admin", "manager"]}>
+              <DashboardLayout>
+                <PlotGrid />
+              </DashboardLayout>
+            </ProtectedRoute>
+          }
+        />
 
       </Routes>
     </BrowserRouter>

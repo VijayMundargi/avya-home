@@ -1,18 +1,10 @@
 const Projects = require("./ProjectModel");
 const Plot = require("./PlotModel");
+const PlotHistory = require("./PlotStatusHistory");
 
+Projects.hasMany(Plot, { foreignKey: "project_id", as: "plots" });
+Plot.belongsTo(Projects, { foreignKey: "project_id", as: "project" });
 
-Projects.hasMany(Plot, {
-  foreignKey: "project_id",
-  as: "plots"
-});
+Plot.hasMany(PlotHistory, { foreignKey: "plot_id" });
 
-Plot.belongsTo(Projects, {
-  foreignKey: "project_id",
-  as: "project"
-});
-
-module.exports = {
-  Projects,
-  Plot
-};
+module.exports = { Projects, Plot, PlotHistory };

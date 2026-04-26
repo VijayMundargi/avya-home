@@ -1,8 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-
-const { isAuthenticated } = require('../middlewares/auth.js');
+const { isAuthenticated } = require("../middlewares/auth.js");
 
 const {
   createPlot,
@@ -10,16 +9,27 @@ const {
   getPlot,
   updatePlot,
   deletePlot,
-  updateStatus  
+  updateStatus,
+  exportPlots,
+  getPlotHistory
 } = require("../controllers/plot.controller.js");
 
-router.post("/create-plot", isAuthenticated, createPlot);
-router.get("/get-plot", isAuthenticated, getPlots);
-router.get("/get-plot/:id", isAuthenticated, getPlot);
-router.put("/update-plot/:id", isAuthenticated, updatePlot);
-router.delete("/delete-plot/:id", isAuthenticated, deletePlot);
+
+router.post("/", isAuthenticated, createPlot);
 
 
-router.put("/update-status/:id/status", isAuthenticated, updateStatus);
+router.get("/", isAuthenticated, getPlots);
+
+router.get("/export/all", isAuthenticated, exportPlots);
+
+router.get("/:id", isAuthenticated, getPlot);
+
+router.put("/:id", isAuthenticated, updatePlot);
+
+
+router.delete("/:id", isAuthenticated, deletePlot);
+
+router.put("/:id/status", isAuthenticated, updateStatus);
+router.get("/:id/history", isAuthenticated, getPlotHistory);
 
 module.exports = router;
