@@ -52,7 +52,7 @@ const Sidebar = () => {
           My Profile
         </NavLink>
 
-        {/* ================= ASSOCIATES ================= */}
+        {/* ASSOCIATES */}
         {(user?.role === "super_admin" || user?.role === "manager") && (
           <>
             <p className={sectionTitle}>Associates</p>
@@ -88,15 +88,22 @@ const Sidebar = () => {
           </>
         )}
 
-        {/* ================= PROJECTS ================= */}
+        {/* PROJECTS */}
         {(user?.role === "super_admin" || user?.role === "manager") && (
           <>
             <p className={sectionTitle}>Projects</p>
 
             <NavLink to="/projects" className={linkClass}>
               <Building2 size={18} />
-              Projects
+              All Projects
             </NavLink>
+
+            {user?.role === "super_admin" && (
+              <NavLink to="/projects/create" className={linkClass}>
+                <Plus size={18} />
+                Create Project
+              </NavLink>
+            )}
 
             <NavLink to="/plots" className={linkClass}>
               <Map size={18} />
@@ -105,7 +112,7 @@ const Sidebar = () => {
           </>
         )}
 
-        {/* ================= CUSTOMERS ================= */}
+        {/* CUSTOMERS */}
         <>
           <p className={sectionTitle}>Customers</p>
 
@@ -120,7 +127,7 @@ const Sidebar = () => {
           </NavLink>
         </>
 
-        {/* ================= FINANCE ================= */}
+        {/* FINANCE */}
         <>
           <p className={sectionTitle}>Finance</p>
 
@@ -140,7 +147,7 @@ const Sidebar = () => {
           </NavLink>
         </>
 
-        {/* ================= REPORTS ================= */}
+        {/* REPORTS */}
         <>
           <p className={sectionTitle}>Reports</p>
 
@@ -150,7 +157,7 @@ const Sidebar = () => {
           </NavLink>
         </>
 
-        {/* ================= SETTINGS ================= */}
+        {/* SETTINGS */}
         {user?.role === "super_admin" && (
           <>
             <p className={sectionTitle}>Settings</p>

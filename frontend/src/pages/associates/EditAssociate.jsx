@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { getAssociate, updateAssociate } from "../../api/associate.api";
+import toast from "../../utils/toast"; // ✅ ADD
 
 const EditAssociate = () => {
   const { id } = useParams();
@@ -16,15 +17,15 @@ const EditAssociate = () => {
 
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
-  const [error, setError] = useState("");
 
+  // FETCH DATA
   useEffect(() => {
     const fetchUser = async () => {
       try {
         const res = await getAssociate(id);
         setForm(res.data.user);
       } catch (err) {
-        setError("Failed to load user");
+        toast.error("Failed to load user"); // ✅ toast
       } finally {
         setLoading(false);
       }
@@ -37,24 +38,42 @@ const EditAssociate = () => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
+  // SUBMIT
   const submit = async (e) => {
     e.preventDefault();
-    setError("");
+
+    if (!form.name || !form.mobile) {
+      toast.error("Name and mobile are required");
+      return;
+    }
+
+    setSaving(true);
 
     try {
-      setSaving(true);
       await updateAssociate(id, form);
-      alert("Updated successfully");
+
+      toast.success("Associate updated successfully"); // ✅ replace alert
+
       navigate("/associates");
+
     } catch (err) {
-      setError(err.response?.data?.message || "Update failed");
+      const message =
+        err?.response?.data?.message ||
+        err?.message ||
+        "Update failed";
+
+      toast.error(message); // ✅ replace setError
     } finally {
       setSaving(false);
     }
   };
 
   if (loading) {
-    return <div className="p-6 text-center text-gray-500">Loading...</div>;
+    return (
+      <div className="p-6 text-center text-gray-500">
+        Loading...
+      </div>
+    );
   }
 
   return (
@@ -73,12 +92,6 @@ const EditAssociate = () => {
 
         {/* CARD */}
         <div className="bg-white rounded-2xl shadow-lg p-6 space-y-6">
-
-          {error && (
-            <div className="bg-red-100 text-red-600 p-3 rounded">
-              {error}
-            </div>
-          )}
 
           <form onSubmit={submit} className="space-y-6">
 

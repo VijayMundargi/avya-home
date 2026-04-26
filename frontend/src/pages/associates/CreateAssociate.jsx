@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { createAssociate } from "../../api/associate.api";
+import toast from "../../utils/toast"; // ✅ use toast
 
 const CreateAssociate = () => {
   const [form, setForm] = useState({
@@ -12,7 +13,6 @@ const CreateAssociate = () => {
   });
 
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -20,14 +20,37 @@ const CreateAssociate = () => {
 
   const submit = async (e) => {
     e.preventDefault();
-    setError("");
+
+    // ✅ FRONTEND VALIDATION
+    if (!form.name || !form.mobile || !form.password) {
+      toast.error("Name, mobile and password are required");
+      return;
+    }
+
+    setLoading(true);
 
     try {
-      setLoading(true);
       await createAssociate(form);
-      alert("Associate created successfully");
+
+      toast.success("Associate created successfully"); // ✅ replaced alert
+
+      // OPTIONAL: reset form
+      setForm({
+        name: "",
+        email: "",
+        mobile: "",
+        password: "",
+        role: "associate",
+        gender: "",
+      });
+
     } catch (err) {
-      setError(err.response?.data?.message || "Something went wrong");
+      const message =
+        err?.response?.data?.message ||
+        err?.message ||
+        "Something went wrong";
+
+      toast.error(message); // ✅ replaced setError
     } finally {
       setLoading(false);
     }
@@ -51,16 +74,9 @@ const CreateAssociate = () => {
         {/* CARD */}
         <div className="bg-white rounded-2xl shadow-lg p-6 space-y-8">
 
-          {/* ERROR */}
-          {error && (
-            <div className="bg-red-100 text-red-600 p-3 rounded-lg text-sm">
-              {error}
-            </div>
-          )}
-
           <form onSubmit={submit} className="space-y-8">
 
-            {/* 🔹 BASIC INFO */}
+            {/* BASIC INFO */}
             <div>
               <h2 className="text-lg font-semibold text-gray-700 mb-4">
                 Basic Information
@@ -76,7 +92,7 @@ const CreateAssociate = () => {
               </div>
             </div>
 
-            {/* 🔹 ROLE & PERSONAL */}
+            {/* ROLE & PERSONAL */}
             <div>
               <h2 className="text-lg font-semibold text-gray-700 mb-4">
                 Role & Personal Details
@@ -84,7 +100,6 @@ const CreateAssociate = () => {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
 
-                {/* ROLE */}
                 <div>
                   <label className="label">Role</label>
                   <select
@@ -99,7 +114,6 @@ const CreateAssociate = () => {
                   </select>
                 </div>
 
-                {/* GENDER */}
                 <div>
                   <label className="label">Gender</label>
                   <select
@@ -139,8 +153,7 @@ const CreateAssociate = () => {
 export default CreateAssociate;
 
 
-
-/* 🔹 REUSABLE INPUT COMPONENT */
+/* 🔹 REUSABLE INPUT */
 const Input = ({ label, ...props }) => (
   <div>
     <label className="block text-sm font-medium text-gray-600 mb-1">

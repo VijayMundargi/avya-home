@@ -1,3 +1,6 @@
+const db = require('../config/database.js')
+const { DataTypes } = require("sequelize");
+
 const Projects = db.define("projects", {
   id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
 
@@ -25,3 +28,5 @@ const Projects = db.define("projects", {
   createdAt: "created_at",
   updatedAt: false
 });
+
+module.exports = Projects

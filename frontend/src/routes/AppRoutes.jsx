@@ -9,7 +9,12 @@ import AssociateList from "../pages/associates/AssociateList";
 import CreateAssociate from "../pages/associates/CreateAssociate";
 import EditAssociate from "../pages/associates/EditAssociate";
 import Profile from "../pages/profile/Profile";
-import WelcomeLetterPage from "../pages/associates/WelcomeLetterPage"; // ✅ ADD THIS
+import WelcomeLetterPage from "../pages/associates/WelcomeLetterPage";
+
+// ✅ ADD PROJECT PAGES
+import ProjectList from "../pages/projects/ProjectList";
+import CreateProject from "../pages/projects/CreateProject";
+import EditProject from "../pages/projects/EditProject";
 
 import ProtectedRoute from "./ProtectedRoute";
 import DashboardLayout from "../layout/DashboardLayout";
@@ -19,13 +24,12 @@ const AppRoutes = () => {
     <BrowserRouter>
       <Routes>
 
-        {/* PUBLIC ROUTES */}
+        {/* PUBLIC */}
         <Route path="/" element={<Login />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password" element={<ResetPassword />} />
 
-        {/* PROTECTED ROUTES */}
-
+        {/* DASHBOARD */}
         <Route
           path="/dashboard"
           element={
@@ -37,6 +41,7 @@ const AppRoutes = () => {
           }
         />
 
+        {/* PROFILE */}
         <Route
           path="/profile"
           element={
@@ -48,6 +53,7 @@ const AppRoutes = () => {
           }
         />
 
+        {/* ASSOCIATES */}
         <Route
           path="/associates"
           element={
@@ -81,13 +87,48 @@ const AppRoutes = () => {
           }
         />
 
-        {/* ✅ ADD THIS ROUTE */}
+        {/* ✅ WELCOME LETTER */}
         <Route
           path="/welcome-letter"
           element={
             <ProtectedRoute roles={["super_admin"]}>
               <DashboardLayout>
                 <WelcomeLetterPage />
+              </DashboardLayout>
+            </ProtectedRoute>
+          }
+        />
+
+        {/* ================= PROJECTS ================= */}
+
+        <Route
+          path="/projects"
+          element={
+            <ProtectedRoute roles={["super_admin", "manager"]}>
+              <DashboardLayout>
+                <ProjectList />
+              </DashboardLayout>
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/projects/create"
+          element={
+            <ProtectedRoute roles={["super_admin"]}>
+              <DashboardLayout>
+                <CreateProject />
+              </DashboardLayout>
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/projects/edit/:id"
+          element={
+            <ProtectedRoute roles={["super_admin"]}>
+              <DashboardLayout>
+                <EditProject />
               </DashboardLayout>
             </ProtectedRoute>
           }

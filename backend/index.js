@@ -2,12 +2,14 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
-
+const ProjectRoute = require('./routes/project.route.js')
 const ErrorMiddleware = require('./middlewares/Error');
 const UserRoute = require('./routes/user.route.js');
 const assocaiateRoute = require('./routes/associate.route.js')
+require('./models/ProjectModel.js');
 const db = require('./config/database.js');
-
+const PlotRoute = require('./routes/plot.route.js');
+require('./models/PlotModel.js');
 const app = express();
 
 
@@ -22,7 +24,9 @@ app.use(cookieParser());
 
 app.use('/api', UserRoute);
 app.use('/api',assocaiateRoute);
-
+app.use('/api',ProjectRoute)
+app.use('/api', PlotRoute);
+console.log("PlotRoute:", typeof PlotRoute);
 
 app.use(ErrorMiddleware);      
 
