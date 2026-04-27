@@ -166,19 +166,19 @@ const deletePlot = catchAsyncError(async (req, res, next) => {
 const updateStatus = catchAsyncError(async (req, res, next) => {
   const { status } = req.body;
 
-  // ✅ VALIDATE INPUT
+
   if (!status) {
     return next(new ErrorHandler("Status is required", 400));
   }
 
-  // ✅ VALID STATUS ENUM
+
   const allowedStatus = ["available", "hold", "booked", "sold_out"];
 
   if (!allowedStatus.includes(status)) {
     return next(new ErrorHandler("Invalid status value", 400));
   }
 
-  // ✅ FIND PLOT
+
   const plot = await Plot.findByPk(req.params.id);
 
   if (!plot) {
@@ -187,7 +187,7 @@ const updateStatus = catchAsyncError(async (req, res, next) => {
 
   const oldStatus = plot.status;
 
-  // ❌ avoid duplicate history
+
   if (oldStatus === status) {
     return res.status(200).json({
       success: true,
@@ -196,13 +196,13 @@ const updateStatus = catchAsyncError(async (req, res, next) => {
     });
   }
 
-  // ✅ UPDATE PLOT
+
   plot.status = status;
   plot.status_updated_at = new Date();
   await plot.save();
 
   try {
-    // ✅ SAVE HISTORY
+    
     await PlotHistory.create({
       plot_id: plot.id,
       old_status: oldStatus,

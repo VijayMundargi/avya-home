@@ -1,51 +1,51 @@
-🚀 Currently Phase 1 Complete — Core Plot Management System  
-🚧 Phase 2 in Progress — Booking, Payments & Commission Engine
+Currently Phase 1 Complete — Core Plot Management System  
+Phase 2 in Progress — Booking, Payments & Commission Engine
 
-# 🏗️ Avya CRM - Plot Management System
+#  Avya CRM - Plot Management System
 
-## 🚀 Features
+##  Features
 
-### 📌 Project Management
+###  Project Management
 - Create & manage multiple projects
 - Location, area, pricing, launch date
 
-### 📌 Plot Inventory
+###  Plot Inventory
 - Add plots with block, dimension, category
 - Pricing (BSP + PLC)
 
-### 📌 Status Tracking
+###  Status Tracking
 - Available / Hold / Booked / Sold Out
 - Status history timeline
 
-### 📌 Filters
+###  Filters
 - Project
 - Status
 - Size range
 - Price range
 - Block code
 
-### 📌 Plot Grid View
+###  Plot Grid View
 - Visual map with color coding
 
-### 📌 Export
+###  Export
 - Export plots to Excel
 
 ---
 
-## 🛠 Tech Stack
+##  Tech Stack
 - Frontend: React + Tailwind
 - Backend: Node.js + Express
 - DB: MySQL + Sequelize
 
 ---
 
-## ⚡ Setup
+##  Setup
 
 ```bash
 npm install
 npm run dev
 
-## 🚧 Upcoming Features
+##  Upcoming Features
 
 ### 👤 Customer & Booking Management
 - Customer KYC (Aadhar, PAN, nominee, document upload)
@@ -53,26 +53,26 @@ npm run dev
 - Booking amount tracking
 - Auto plot status update (Available → Booked → Sold)
 
-### 💳 Payment & Installment System
+###  Payment & Installment System
 - Record installments (RTGS / NEFT / Cheque / Cash)
 - Payment status (Received / Pending / Bounced)
 - Balance tracking & auto-completion
 - Monthly payment statements
 - Booking receipt PDF generation
 
-### 🎯 PLC & Discount Engine
+###  PLC & Discount Engine
 - Category-based PLC charges
 - Customer-level discount management
 - Dynamic price recalculation
 
-### 💰 Commission & Payout System
+###  Commission & Payout System
 - Multi-level income (Self, Level, Leadership, Royalty)
 - Monthly bonus calculation
 - Automated payout cycles
 - TDS calculation (5% / 20% as per PAN rules)
 - Payout statement & reports
 
-### 🌐 Referral Network System
+###  Referral Network System
 - Multi-level associate tree
 - Downline tracking & performance stats
 - Visual tree UI
@@ -85,13 +85,13 @@ npm run dev
 - Commission configuration
 - Audit logs (who did what)
 
-### 📊 Reports & Analytics
+###  Reports & Analytics
 - Revenue dashboards
 - Project-wise sales reports
 - Associate performance tracking
 - Excel exports
 
-### 📄 PDF & Communication
+###  PDF & Communication
 - Welcome letter generation
 - Booking receipt PDF
 - Payout statements
@@ -104,7 +104,7 @@ npm run dev
 - Dashboard insights
 
 
-## 🔐 Environment Variables (Backend)
+##  Environment Variables (Backend)
 
 Create a `.env` file inside the `/backend` folder and add:
 
@@ -130,7 +130,7 @@ TWILIO_ACCOUNT_SID=your_twilio_sid
 TWILIO_AUTH_TOKEN=your_twilio_token
 FROM_NUMBER=your_twilio_number
 
-## 📁 Project Structure
+##  Project Structure
 backend/
 │
 ├── config/
@@ -232,7 +232,7 @@ frontend/
 └── vite.config.js
 
 
-## 🧩 Architecture
+##  Architecture
 
 - Modular backend (MVC pattern)
 - RESTful API design

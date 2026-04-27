@@ -30,6 +30,17 @@ import PlotGrid from "../pages/plots/PlotGrid";
 import ProtectedRoute from "./ProtectedRoute";
 import DashboardLayout from "../layout/DashboardLayout";
 
+// ✅ ADD THESE
+import CustomerList from "../pages/customers/CustomerList";
+import CreateCustomer from "../pages/customers/CreateCustomer";
+import CustomerDetails from "../pages/customers/CustomerDetails";
+import Booking from "../pages/customers/Booking";
+
+import CreatePayment from "../pages/payments/CreatePayment";
+import PaymentList from "../pages/payments/PaymentList";
+
+import Statement from "../pages/reports/Statement";
+
 const AppRoutes = () => {
   return (
     <BrowserRouter>
@@ -189,6 +200,89 @@ const AppRoutes = () => {
             </ProtectedRoute>
           }
         />
+
+          {/* ================= CUSTOMERS ================= */}
+
+<Route
+  path="/customers"
+  element={
+    <ProtectedRoute>
+      <DashboardLayout>
+        <CustomerList />
+      </DashboardLayout>
+    </ProtectedRoute>
+  }
+/>
+
+<Route
+  path="/customers/create"
+  element={
+    <ProtectedRoute>
+      <DashboardLayout>
+        <CreateCustomer />
+      </DashboardLayout>
+    </ProtectedRoute>
+  }
+/>
+
+<Route
+  path="/customers/:id"
+  element={
+    <ProtectedRoute>
+      <DashboardLayout>
+        <CustomerDetails />
+      </DashboardLayout>
+    </ProtectedRoute>
+  }
+/>
+
+<Route
+  path="/booking"
+  element={
+    <ProtectedRoute>
+      <DashboardLayout>
+        <Booking />
+      </DashboardLayout>
+    </ProtectedRoute>
+  }
+/>
+
+{/* ================= PAYMENTS ================= */}
+
+<Route
+  path="/payments"
+  element={
+    <ProtectedRoute>
+      <DashboardLayout>
+        <PaymentList />
+      </DashboardLayout>
+    </ProtectedRoute>
+  }
+/>
+
+<Route
+  path="/payments/create"
+  element={
+    <ProtectedRoute>
+      <DashboardLayout>
+        <CreatePayment />
+      </DashboardLayout>
+    </ProtectedRoute>
+  }
+/>
+
+{/* ================= REPORTS ================= */}
+
+<Route
+  path="/reports"
+  element={
+    <ProtectedRoute>
+      <DashboardLayout>
+        <Statement />
+      </DashboardLayout>
+    </ProtectedRoute>
+  }
+/>
 
       </Routes>
     </BrowserRouter>

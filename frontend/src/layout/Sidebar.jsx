@@ -105,7 +105,6 @@ const Sidebar = () => {
               </NavLink>
             )}
 
-            {/* 🔥 PLOTS SUB-MODULE */}
             <NavLink to="/plots" className={linkClass}>
               <Map size={18} />
               All Plots
@@ -126,12 +125,27 @@ const Sidebar = () => {
 
           <NavLink to="/customers" className={linkClass}>
             <UserCircle size={18} />
-            Customers
+            Customer List
+          </NavLink>
+
+          <NavLink to="/customers/create" className={linkClass}>
+            <Plus size={18} />
+            Add Customer (KYC)
+          </NavLink>
+
+          <NavLink to="/booking" className={linkClass}>
+            <Building2 size={18} />
+            Plot Booking
           </NavLink>
 
           <NavLink to="/payments" className={linkClass}>
             <CreditCard size={18} />
             Payments
+          </NavLink>
+
+          <NavLink to="/payments/create" className={linkClass}>
+            <Plus size={18} />
+            Add Payment
           </NavLink>
         </>
 
@@ -161,7 +175,7 @@ const Sidebar = () => {
 
           <NavLink to="/reports" className={linkClass}>
             <TrendingUp size={18} />
-            Business Report
+            Payment Statement
           </NavLink>
         </>
 

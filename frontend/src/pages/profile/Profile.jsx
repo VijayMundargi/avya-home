@@ -2,14 +2,36 @@ import { useState, useEffect } from "react";
 import api from "../../api/axios";
 
 const Profile = () => {
-  const [form, setForm] = useState({});
+  // ✅ FIX 1: Proper initial state (no undefined)
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    mobile: "",
+    gender: "",
+    date_of_birth: "",
+    address: "",
+    pan_number: "",
+    aadhar_number: "",
+    bank_name: "",
+    bank_account: "",
+    bank_ifsc: "",
+    nominee_name: "",
+    nominee_relation: "",
+  });
+
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchProfile = async () => {
       const res = await api.get("/me");
-      setForm(res.data.user);
+
+      // ✅ FIX 2: Safe merge (avoid undefined fields)
+      setForm((prev) => ({
+        ...prev,
+        ...res.data.user,
+      }));
     };
+
     fetchProfile();
   }, []);
 
@@ -148,11 +170,14 @@ const Profile = () => {
 
 export default Profile;
 
-
-/* 🔹 Reusable Input Component */
-const Input = ({ label, ...props }) => (
+/* 🔥 FIXED INPUT COMPONENT */
+const Input = ({ label, value, ...props }) => (
   <div>
     <label className="label">{label}</label>
-    <input {...props} className="input" />
+    <input
+      {...props}
+      value={value || ""}  
+      className="input"
+    />
   </div>
 );

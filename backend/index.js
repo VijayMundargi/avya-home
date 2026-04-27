@@ -10,23 +10,23 @@ require('./models/ProjectModel.js');
 const db = require('./config/database.js');
 const PlotRoute = require('./routes/plot.route.js');
 require('./models/PlotModel.js');
+const corsConfig = require('./config/corsConfig.js')
+const CustomerRoute = require('./routes/customer.route.js')
 const app = express();
 
 
-app.use(cors({
-    credentials: true,
-    origin: 'http://localhost:5173',
-}));
 
+app.use(corsConfig());
 app.use(express.json());        
 app.use(cookieParser());        
-
+app.use(express.urlencoded({ extended: true }));
 
 app.use('/api', UserRoute);
 app.use('/api',assocaiateRoute);
 app.use('/api',ProjectRoute)
 app.use('/api/plot', PlotRoute);
-console.log("PlotRoute:", typeof PlotRoute);
+app.use('/api',CustomerRoute)
+
 
 app.use(ErrorMiddleware);      
 
